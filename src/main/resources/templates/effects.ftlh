@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> BYEFFECTS</title>
+    <title>BUYSELL</title>
 </head>
-<BODY>
-<h1>byeffects</h1><hr>
-<h4>Effect from table</h4>
-<#list effects as effect>
-    <div>
-        <p> <b>${effect.id}</b> ${effect.eff} ${effect.pre} </p>
-    </div>
-</#list>
-</BODY>
+<body>
+<hr>
+<h3>Создать новый товар</h3>
+<form action="/effect/create" method="post">
+    Эффект антидепрессанта: <input type="text" name="eff"/><br><br>
+    Препараты: <input type="text" name="pre"/><br><br>
+    <input type="submit" value="Добавить товар"/>
+</form>
+</body>
 </html>
