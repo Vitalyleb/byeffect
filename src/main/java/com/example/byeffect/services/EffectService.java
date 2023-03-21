@@ -15,21 +15,18 @@ import java.util.List;
 @Slf4j
 public class EffectService {
     private final EffectRepository effectRepository;
-    public List<Effect> listEffects() {
-        return effects;
+
+    public List<Effect> listEffects(String title) {
+        if (title != null) return effectRepository.findByTitle(title);
+        return effectRepository.findAll();
+    }
+    public void saveEffect (Effect effect){
+        log.info("Saving new {}", effect);
+        effectRepository.save(effect);
     }
 
-    public void saveEffect(Effect effect) {
-        effect.setId(++ID);
-        effects.add(effect);
-    }
-
-    public Effect getEffectById(Long id) {
-        for (Effect effect : effects) {
-            if (effect.getId().equals(id))
-                return effect;
-        }
-        return null;
+    public Effect getProductById(Long id) {
+        return effectRepository.findById(id).orElse(null);
     }
 }
 
