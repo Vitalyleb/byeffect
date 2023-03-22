@@ -11,15 +11,19 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/effect")
-@RestController
+
+@Controller
 public class EffectController {
     @Autowired
     private  EffectService effectService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Effect>> effect (){
-        return ResponseEntity.ok(effectService.getall());
+        return ResponseEntity.ok(effectService.getall()) ;
+    }
+    @GetMapping("/")
+    public String effects(){
+        return "2";
     }
 
 }
