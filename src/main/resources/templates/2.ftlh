@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
@@ -11,23 +11,14 @@
         .custom-btn {
             width: 130px;
             height: 40px;
-            color: #fff;
+            color: #118f93;
             border-radius: 5px;
             padding: 10px 25px;
             font-family: 'Lato', sans-serif;
             font-weight: 500;
-            background: transparent;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            display: inline-block;
-            box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-            7px 7px 20px 0px rgba(0,0,0,.1),
-            4px 4px 5px 0px rgba(0,0,0,.1);
-            outline: none;
         }
         .btn-8 {
-            background-color: #f0ecfc;
+            background-color: #c38f93;
             background-image: linear-gradient(315deg, #f0ecfc 0%, #c797eb 74%);
             line-height: 42px;
             padding: 0;
@@ -35,30 +26,33 @@
         }
     </style>
 </head>
-<body>
-<h1 class="u-custom-font u-font-montserrat u-text u-text-grey-75 u-text-1"> Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической болезнью сердца </h1>
+<body style="background-color: #ADD8E6">
+
+
+<h1><p align="center" style="font:italic 50px bold "Times New Roman> Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической болезнью сердца </p></h1>
 <ol class="u-align-justify u-text u-text-2">
-    <li>В первой
+    <li><p align="justify" style="font:italic 20px bold "Times New Roman>В первой
         графе («шаги алгоритма») поставьте «да» напротив выбранной Вами группы
         антидепрессантов, а затем и антидепрессанта, с Вашей точки зрения наиболее
         подходящих для конкретного пациента с ишемической болезнью сердца и
         диагностированным депрессивным расстройством.<br>
-    </li>
-    <li> Далее
+        </p></li>
+    <li><p align="justify" style="font:italic 20px bold "Times New Roman>Далее
         последовательно анализируйте каждый из ниже представленных «шагов алгоритма»,
         отмечая каким-либо образом (например, «V»)
         желаемый эффект для конкретного пациента, а затем – и один, выбранный Вами из
-        предложенной группы, антидепрессант.</li>
-    <li> Подсчитайте
+        предложенной группы, антидепрессант.</p></li>
+    <li><p align="justify" style="font:italic 20px bold "Times New Roman> Подсчитайте
         количество вариантов «да» для каждого из антидепрессантов. 3 препарата,
         набравших максимальное количество выборов, являются оптимальными для данного
-        пациента с ИБС и выявленным депрессивным расстройством.</li>
-    <li>Уточните
+        пациента с ИБС и выявленным депрессивным расстройством.</p></li>
+    <li><p align="justify" style="font:italic 20px bold "Times New Roman>Уточните
         для выбранного антидепрессанта относительные противопоказания и взаимодействия
         с другими препаратами, принимаемыми пациентом в соответствии с инструкцией к
-        применению.<br>
+        применению.<br></p>
     </li>
 </ol>
 <center><button class="custom-btn btn-8"><span>Рассчет</span></button></center>
+
 </body>
 </html>
