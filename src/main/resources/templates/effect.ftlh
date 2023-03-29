@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="keywords" content="​Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической болезнью сердца​">
     <meta name="description" content="">
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <title>Главная</title>
     <title>Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической болезнью сердца</title>
     <style type="text/css">
@@ -56,23 +57,21 @@
 
 <#list effects as effect>
     <div>
-<#--        <table>-->
-<#--            <thead>-->
-<#--            <tr>-->
-<#--                <th scope="col">id</th>-->
-<#--                <th scope="col">Effect</th>-->
-<#--                <th scope="col">prep</th>-->
-<#--            </tr>-->
-<#--            </thead>-->
-<#--            <tbody>-->
-<#--&lt;#&ndash;            <tr th:each="effect : ${effect}">&ndash;&gt;-->
-<#--                <td th:text=${effect.id}></td>-->
-<#--                <td th:text=${effect.eff}></td>-->
-<#--                <td th:text="${effect.pre}"></td>-->
-<#--            </tr>-->
-<#--            </tbody>-->
-<#--        </table>-->
-        <p><b>${effect.eff}</b> ${effect.pre}</p>
+        <table border="1" cellspacing="1" cellpadding="5">
+            <tr class="tableHeader">
+                <td></td>
+                <td>eff</td>
+                <td>pre</td>
+            </tr>
+
+                <tr class="tableBody">
+                    <td> <input type="checkbox" class="select-item checkbox" name="select-item" value="1000"></td>
+                    <td>${effect.eff}</td><td>${effect.pre}</td>
+                </tr>
+
+        </table>
+<#--        <input type="checkbox" id="eff" name="eff">-->
+<#--        <label><b>${effect.eff}</b> ${effect.pre}</label>-->
     </div>
 </#list>
 
@@ -80,4 +79,17 @@
     <center><button class="custom-btn btn-8" type="submit"><span><a href="/calculation">Рассчет</a></span></button></center>
 </form>
 </body>
+<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script>
+    $(function (){
+        $("input.select-item").click(function () {
+            var checked = this.checked;
+            var all = $("input.select-all")[0];
+            var total = $("input.select-item").length;
+            var len = $("input.select-item:checked:checked").length;
+            all.checked = len===total;
+        });
+    })
+</script>
 </html>
