@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Результат работы алгоритма</title>
-</head>
-<body>
-<h1 align="center">Результат работы алгоритма</h1><hr>
+<#--<!DOCTYPE html>-->
+<#--<html xmlns:th="http://www.w3.org/1999/xhtml">-->
+<#--<head>-->
+<#--    <title>Результат работы алгоритма</title>-->
+<#--</head>-->
+<#--<body>-->
+<#--<h1 align="center">Результат работы алгоритма</h1><hr>-->
 <#--<#list effects as effect>-->
 <#--    <table class="table">-->
 <#--        <thead>-->
@@ -24,5 +24,5 @@
 <#--    </table>-->
 <#--</#list>-->
 
-</body>
-</html>
+<#--</body>-->
+<#--</html>-->

@@ -25,9 +25,31 @@
             padding: 0;
             border: none;
         }
+        table {
+            font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+            font-size: 14px;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th, td:first-child {
+            background: #AFCDE7;
+            color: white;
+            padding: 10px 20px;
+        }
+        th, td {
+            border-style: solid;
+            border-width: 0 1px 1px 0;
+            border-color: white;
+        }
+        td {
+            background: #D8E6F3;
+        }
+        th:first-child, td:first-child {
+            text-align: left;
+        }
     </style>
 </head>
-<body style="background-color: #ADD8E6">
+<body>
 
 
 <h1><p align="center" style="font:italic 50px bold "Times New Roman> Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической болезнью сердца </p></h1>
@@ -53,25 +75,30 @@
             применению.<br></p>
     </li>
 </ol>
+<br>
 
 
 <#list effects as effect>
     <div>
-        <table border="1" cellspacing="1" cellpadding="5">
-            <tr class="tableHeader">
+        <table class="table_col" border="1" cellspacing="1" cellpadding="5" width="80%" align="center">
+            <colgroup>
+                <col style="background:#C7DAF0;">
+            </colgroup>
+
+            <tr>
                 <td></td>
-                <td>eff</td>
-                <td>pre</td>
+                <th>Эффекты</th>
+                <th>Препараты</th>
+            </tr>
+            <tr class="tableBody" align="center" valign="middle">
+                <td width="3%" align="center"> <input type="checkbox" class="select-item checkbox" name="select-item" value="1000"></td>
+                <td width="50%" align="center">${effect.eff} </td>
+                <td width="50%" align="center">${effect.pre}</td>
             </tr>
 
-                <tr class="tableBody">
-                    <td> <input type="checkbox" class="select-item checkbox" name="select-item" value="1000"></td>
-                    <td>${effect.eff}</td><td>${effect.pre}</td>
-                </tr>
-
         </table>
-<#--        <input type="checkbox" id="eff" name="eff">-->
-<#--        <label><b>${effect.eff}</b> ${effect.pre}</label>-->
+        <#--        <input type="checkbox" id="eff" name="eff">-->
+        <#--        <label><b>${effect.eff}</b> ${effect.pre}</label>-->
     </div>
 </#list>
 
