@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
@@ -9,22 +9,6 @@
     <title>Главная</title>
     <title>Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической болезнью сердца</title>
     <style type="text/css">
-        .custom-btn {
-            width: 130px;
-            height: 40px;
-            color: #118f93;
-            border-radius: 5px;
-            padding: 10px 25px;
-            font-family: 'Lato', sans-serif;
-            font-weight: 500;
-        }
-        .btn-8 {
-            background-color: #c38f93;
-            background-image: linear-gradient(315deg, #f0ecfc 0%, #c797eb 74%);
-            line-height: 42px;
-            padding: 0;
-            border: none;
-        }
         table {
             font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
             font-size: 14px;
@@ -81,42 +65,64 @@
 <#list effects as effect>
     <div>
         <table class="table_col" border="1" cellspacing="1" cellpadding="5" width="80%" align="center">
-            <colgroup>
-                <col style="background:#C7DAF0;">
-            </colgroup>
-
+            <thead>
             <tr>
-                <td></td>
                 <th>Эффекты</th>
                 <th>Препараты</th>
             </tr>
+            </thead>
+            <tbody>
             <tr class="tableBody" align="center" valign="middle">
-                <td width="3%" align="center"> <input type="checkbox" class="select-item checkbox" name="select-item" value="1000"></td>
+                <td><input type="checkbox" name="item1"></td>
                 <td width="50%" align="center">${effect.eff} </td>
                 <td width="50%" align="center">${effect.pre}</td>
             </tr>
-
+            </tbody>
         </table>
-        <#--        <input type="checkbox" id="eff" name="eff">-->
-        <#--        <label><b>${effect.eff}</b> ${effect.pre}</label>-->
+
     </div>
 </#list>
+<br>
+<button onclick="button_click">Показать препараты</button>
 
-<form action="/calculation" method="get" target="_blank">
-    <center><button class="custom-btn btn-8" type="submit"><span><a href="/calculation">Рассчет</a></span></button></center>
-</form>
-</body>
-<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <script>
-    $(function (){
-        $("input.select-item").click(function () {
-            var checked = this.checked;
-            var all = $("input.select-all")[0];
-            var total = $("input.select-item").length;
-            var len = $("input.select-item:checked:checked").length;
-            all.checked = len===total;
-        });
-    })
+    function button_click() {
+        // Получаем все checkbox
+        var checkboxes = document.getElementsByName('checkbox');
+
+        // Создаем список для хранения отмеченных checkbox
+        var checked_checkboxes = [];
+
+        // Проходимся по всем checkbox и добавляем отмеченные в список
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                checked_checkboxes.push(checkboxes[i]);
+            }
+        }
+
+        // Создаем список для хранения слов из второго столбца
+        var column2_data = [];
+
+        // Проходимся по всем отмеченным checkbox и добавляем данные из второго столбца в список
+        for (var i = 0; i < checked_checkboxes.length; i++) {
+            var row = checked_checkboxes[i].parentNode.parentNode;
+            var column2_cell = row.cells[1];
+            column2_data.push(column2_cell.innerHTML);
+        }
+
+        // Считаем повторения слов и выводим три наиболее повторяющихся слова
+        var word_count = {};
+        for (var i = 0; i < column2_data.length; i++) {
+            if (column2_data[i] in word_count) {
+                word_count[column2_data[i]] += 1;
+            } else {
+                word_count[column2_data[i]] = 1;
+            }
+        }
+        var top_three = Object.keys(word_count).sort(function(a, b) { return word_count[b] - word_count[a]; }).slice(0, 3);
+        console.log(top_three);
+    }
 </script>
+</body>
 </html>
