@@ -1,39 +1,35 @@
 function filterTable() {
     var table = document.getElementsByTagName('table')[0];
-    var checkboxes = table.getElementsByTagName('input');
-    var rows = table.getElementsByTagName('tr');
-    var filteredRows = [];
+    // Получаем все checkbox в таблице
+    var checkboxes = document.querySelectorAll('input[type=checkbox]');
 
-    // Фильтрация строк таблицы
-    for (var i = 1; i < rows.length; i++) {
-        if (checkboxes[i-1].checked) {
-            filteredRows.push(rows[i]);
+    // Создаем массив для хранения помеченных checkbox и данных из второго столбца
+    var checked = [];
+    var data = [];
+
+    // Проходимся по всем checkbox и добавляем помеченные в массив
+    for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+            checked.push(checkboxes[i]);
+            data.push(checkboxes[i].parentNode.previousSibling.textContent);
         }
     }
-    // Очистка таблицы от всех строк
-    while (table.rows.length > 1) {
-        table.deleteRow(1);
-    }
-    // Добавление отфильтрованных строк в таблицу
-    for (var i = 0; i < filteredRows.length; i++) {
-        table.appendChild(filteredRows[i]);
-    }
 
-    // // Проходимся по всем строкам таблицы
-    // var rows = document.getElementsByTagName("tr");
-    // for (var i = 0; i < rows.length; i++) {
-    //     // Если строка содержит checkbox, проверяем, был ли он помечен
-    //     var rowCheckbox = rows[i].getElementsByTagName("input")[0];
-    //     if (rowCheckbox && rowCheckbox.type === "checkbox") {
-    //         if (checked.indexOf(rowCheckbox) === -1) {
-    //             // Если checkbox не помечен, скрываем строку
-    //             rows[i].style.display = "none";
-    //         } else {
-    //             // Если checkbox помечен, показываем строку
-    //             rows[i].style.display = "";
-    //         }
-    //     }
-    // }
+    // Проходимся по всем строкам таблицы
+    var rows = document.getElementsByTagName("tr");
+    for (var i = 0; i < rows.length; i++) {
+        // Если строка содержит checkbox, проверяем, был ли он помечен
+        var rowCheckbox = rows[i].getElementsByTagName("input")[0];
+        if (rowCheckbox && rowCheckbox.type === "checkbox") {
+            if (checked.indexOf(rowCheckbox) === -1) {
+                // Если checkbox не помечен, скрываем строку
+                rows[i].style.display = "none";
+            } else {
+                // Если checkbox помечен, показываем строку
+                rows[i].style.display = "";
+            }
+        }
+    }
 
     // Считаем повторяющиеся слова
     var words = [];
