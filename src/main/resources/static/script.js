@@ -43,7 +43,9 @@ function filterTable() {
         } else {
             words[word] = 1;
         }
+        console.log(words)
     }
+
 
     // Сортируем слова по количеству повторений
     var sortedWords = Object.keys(words).sort(function(a, b) {
