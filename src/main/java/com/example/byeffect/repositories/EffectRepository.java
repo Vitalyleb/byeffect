@@ -1,13 +1,19 @@
 package com.example.byeffect.repositories;
 
 import com.example.byeffect.models.Effect;
+import org.aspectj.apache.bcel.classfile.Module;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 import java.util.List;
+import java.util.Optional;
+
 @Repository
-public interface EffectRepository extends JpaRepository<Effect, Long> {
-    List<Effect> findByEff(String eff);
+public interface EffectRepository extends CrudRepository<Effect, Long> {
+//    List<Effect> findByEff(String eff);
+ Effect getById(Long id);
+
 }
