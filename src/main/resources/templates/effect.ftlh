@@ -57,17 +57,161 @@
             </tr>
             </tbody>
         </table>
-
     </div>
 </#list>
 <br>
-<button onclick="filterTable()">Filter Data</button>
+<button id="btn">Filter Dataaaa</button>
 <h2>Список наиболее повторяющихся слов:</h2>
 <ul id="wordList"></ul>
 <#--<form name="search">-->
 <#--    <input type="submit" name="qqq" value="Send"/>-->
 <#--</form>-->
 <#--    <button onclick = "button_click()" name="qqq">Показать препараты</button>-->
-<script src="../static/script.js"></script>
+<#--<script src="../static/script.js"></script>-->
+<script>
+    const button = document.getElementById('btn')
+    button.addEventListener('click', filterTable)
+
+
+    function filterTable() {
+
+        function countSubstring(str, substr) {
+            var count = 0;
+            var pos = str.indexOf(substr);
+
+            while (pos !== -1) {
+                count++;
+                pos = str.indexOf(substr, pos + 1);
+            }
+
+            return count;
+        }
+
+        var table = document.getElementsByTagName('table')[0];
+        const allRows = document.getElementsByTagName('table')
+        // Получаем все checkbox в таблице
+        var checkboxes = document.querySelectorAll('input[type=checkbox]');
+
+        // Создаем массив для хранения помеченных checkbox и данных из второго столбца
+        var checked = [];
+        var data = [];
+        const checkedRows = []
+
+        // Проходимся по всем checkbox и добавляем помеченные в массив
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                checkedRows.push(allRows[i].innerText)
+                checked.push(checkboxes[i]);
+                data.push(checkboxes[i].parentNode.previousSibling.textContent);
+            }
+        }
+
+        let medicineArray = []
+        let medicineString = ''
+
+        for (let i = 0; i < checkedRows.length; i++){
+            checkedRows[i] = checkedRows[i].slice(checkedRows[i].lastIndexOf('\t')).replace('\t', '')
+            medicineString += checkedRows[i]
+            medicineArray.push(...checkedRows[i].replaceAll(' ', '').split(','))
+        }
+
+        console.log('String', medicineString)
+        console.log('Array', medicineArray)
+
+        let biggest = {
+            name: '',
+            count: 0
+        }
+        let middle = {
+            name: '',
+            count: 0
+        }
+        let smallest = {
+            name: '',
+            count: 0
+        }
+
+        for (let i = 0; i < medicineArray.length; i++){
+            const result = countSubstring(medicineString, medicineArray[i])
+            if (result > biggest.count){
+                biggest.name = medicineArray[i]
+                biggest.count = result
+            } else if (result > middle.count){
+                if (biggest.name !== medicineArray[i]){
+                    middle.name = medicineArray[i]
+                    middle.count = result
+                }
+            } else if (result > smallest.count){
+                if (biggest.name !== medicineArray[i] && middle.name !== medicineArray[i]){
+                    smallest.name = medicineArray[i]
+                    smallest.count = result
+                }
+            }
+        }
+
+        console.log(biggest)
+        console.log(middle)
+        console.log(smallest)
+
+
+        var str = "Hello, world!";
+        var substr = "l";
+        // var count = countSubstring(str, substr);
+
+        // console.log(count); // 3
+
+        // console.log('rows', checkedRows)
+
+        // Проходимся по всем строкам таблицы
+        var rows = document.getElementsByTagName("tr");
+        for (var i = 0; i < rows.length; i++) {
+            // Если строка содержит checkbox, проверяем, был ли он помечен
+            var rowCheckbox = rows[i].getElementsByTagName("input")[0];
+            if (rowCheckbox && rowCheckbox.type === "checkbox") {
+                if (checked.indexOf(rowCheckbox) === -1) {
+                    // Если checkbox не помечен, скрываем строку
+                    rows[i].style.display = "none";
+                } else {
+                    // Если checkbox помечен, показываем строку
+                    rows[i].style.display = "";
+                }
+            }
+        }
+
+        // Считаем повторяющиеся слова
+        var words = [];
+        var wordList = document.getElementById('wordList');
+        var rows = table.getElementsByTagName('tr');
+
+        for (var i = 1; i < rows.length; i++) {
+            var word = rows[i].getElementsByTagName('td')[1].textContent;
+            if (words[word]) {
+                words[word]++;
+            } else {
+                words[word] = 1;
+            }
+            console.log(words)
+        }
+
+
+        // Сортируем слова по количеству повторений
+        var sortedWords = Object.keys(words).sort(function(a, b) {
+            return words[b] - words[a];
+        });
+
+        // Выводим три наиболее повторяющихся слова
+        for (var i = 0; i < 3; i++) {
+            for (var i = 0; i < 3; i++) {
+                if (sortedWords[i]) {
+                    var li = document.createElement('li');
+                    li.textContent = biggest.name + ', ' + middle.name + ', ' + smallest.name + '.';
+
+                    // li.textContent = sortedWords[i] + ' (' + words[sortedWords[i]] + ')';
+                    wordList.appendChild(li);
+                }
+            }
+        }
+    }
+</script>
 </body>
 </html>

@@ -1,4 +1,7 @@
 function filterTable() {
+
+    console.log('I am here!')
+
     var table = document.getElementsByTagName('table')[0];
     // Получаем все checkbox в таблице
     var checkboxes = document.querySelectorAll('input[type=checkbox]');
@@ -12,6 +15,7 @@ function filterTable() {
         if (checkboxes[i].checked) {
             checked.push(checkboxes[i]);
             data.push(checkboxes[i].parentNode.previousSibling.textContent);
+            // console.log(checkboxes[i].parentNode.previousSibling.textContent);
         }
     }
 
@@ -43,7 +47,7 @@ function filterTable() {
         } else {
             words[word] = 1;
         }
-        console.log(words)
+        // console.log(words)
     }
 
 
