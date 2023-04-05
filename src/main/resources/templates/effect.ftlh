@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,35 @@
     <title>Главная</title>
     <title>Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической болезнью сердца</title>
     <link rel="stylesheet" href="../static/my_file.css">
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+
+        body {
+            background-color: #EDF5E1;
+            font-family: "Roboto", helvetica, "Times New Roman", sans-serif;
+            text-rendering: optimizeLegibility;
+        }
+
+        .table-fill {
+            background: white;
+            padding:5px;
+            width: 80%;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            animation: float 5s infinite;
+        }
+        tr {
+            border-top: 1px solid #C1C3D1;
+            color:#666B85;
+        }
+
+        td {
+            background:#FFFFFF;
+            padding:10px;
+            text-align:left;
+
+        }
+
+    </style>
 </head>
 <body>
 
@@ -41,7 +71,7 @@
 
 <#list effects as effect>
     <div>
-        <table class="table_col" border="1" cellspacing="1" cellpadding="5" width="80%" align="center">
+        <table class="table-fill" border="1" cellspacing="1" cellpadding="5" width="80%" align="center">
             <thead>
             <tr>
                 <th></th>
@@ -60,7 +90,10 @@
     </div>
 </#list>
 <br>
-<button id="btn">Filter Dataaaa</button>
+<div align="center">
+    <button class="btn" id="btn">Рассчитать</button>
+</div>
+
 <h2>Список наиболее повторяющихся слов:</h2>
 <ul id="wordList"></ul>
 <#--<form name="search">-->
@@ -71,6 +104,8 @@
 <script>
     const button = document.getElementById('btn')
     button.addEventListener('click', filterTable)
+    // let enter = button => button.classList.toggle("bg-rose");
+    // let leave = button => button.classList.toggle("bg-rose");
 
 
     function filterTable() {
