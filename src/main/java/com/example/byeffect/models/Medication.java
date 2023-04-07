@@ -9,18 +9,18 @@ import lombok.NoArgsConstructor;
 import java.util.Set;
 
 @Entity
-@Table(name = "Preparation")
+@Table(name = "preparation")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = {"preName"})
+@EqualsAndHashCode(of = {"pre_name"})
 
 public class Medication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    private String preName;
-    @ManyToMany(mappedBy = "medications")
+    private String pre_name;
+    @ManyToMany(mappedBy = "preparations")
     private Set<Effect> effects;
 }

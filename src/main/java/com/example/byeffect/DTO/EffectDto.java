@@ -1,6 +1,5 @@
 package com.example.byeffect.DTO;
 
-import com.example.byeffect.models.Medication;
 import lombok.*;
 
 import java.util.Set;
@@ -13,6 +12,6 @@ import java.util.Set;
 
 public class EffectDto {
     private Long id;
-    private String eff;
-    private Set<MedicationDto> medication;
+    private String effect_of_antidepresant;
+    private Set<MedicationDto> preparation;
 }

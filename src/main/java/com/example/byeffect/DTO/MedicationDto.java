@@ -10,5 +10,5 @@ import lombok.*;
 
 public class MedicationDto {
     private Long id;
-    private String preName;
+    private String pre_name;
 }

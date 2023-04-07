@@ -33,7 +33,8 @@ public class EffectController {
 //        return ResponseEntity.ok(effectService.getall()) ;
 //    }
 
-    @GetMapping("/{id}")
+
+    @GetMapping("/a/{id}")
     public EffectDto sayHello(@PathVariable Long id){
         Effect effect = effectService.getEffect(id);
         return EffectMapper.INSTANCE.toDTO(effect);
