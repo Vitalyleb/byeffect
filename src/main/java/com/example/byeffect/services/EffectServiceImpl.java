@@ -14,8 +14,16 @@ public class EffectServiceImpl implements EffectService{
 
     @Override
     public Effect getEffect(Long id) {
-        return effectRepository.getById(id).get();
+        return effectRepository.getById(id);
 //        return effectRepository.getById(id).orElseThrow(()->new NullPointerException());
+    }
+
+    public EffectRepository getEffectRepository() {
+        return effectRepository;
+    }
+
+    public void setEffectRepository(EffectRepository effectRepository) {
+        this.effectRepository = effectRepository;
     }
 }
 

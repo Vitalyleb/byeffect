@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface EffectRepository extends CrudRepository<Effect, Long> {
 //    List<Effect> findByEff(String eff);
- Optional<Effect> getById(Long id);
+ Effect getById(Long id);
 
 }

@@ -45,6 +45,7 @@ public class EffectController {
         return  toDTO(effect);
     }
 
+
     private EffectDto toDTO(Effect effect){
         Set<MedicationDto> medicationDtos = toDTOs(effect.getPreparations());
         return EffectDto.builder()
@@ -55,7 +56,7 @@ public class EffectController {
     }
 
     private Set<MedicationDto> toDTOs(Set<Medication> medication){
-        return  medication.stream().map(medication1 -> toDTO(medication1)).collect(Collectors.toSet());
+        return  medication.stream().map(this::toDTO).collect(Collectors.toSet());
 
     }
 
@@ -65,5 +66,9 @@ public class EffectController {
                 .pre_name(medication.getPre_name()).
                 build();
 
+    }
+
+    public EffectService getEffectService() {
+        return effectService;
     }
 }

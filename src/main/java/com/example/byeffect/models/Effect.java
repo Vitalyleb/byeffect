@@ -37,4 +37,28 @@ public class Effect {
         preparations.remove(medication);
         medication.getEffects().remove(this);
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getEffectOfAntidepresant() {
+        return effectOfAntidepresant;
+    }
+
+    public void setEffectOfAntidepresant(String effectOfAntidepresant) {
+        this.effectOfAntidepresant = effectOfAntidepresant;
+    }
+
+    public Set<Medication> getPreparations() {
+        return preparations;
+    }
+
+    public void setPreparations(Set<Medication> preparations) {
+        this.preparations = preparations;
+    }
 }
