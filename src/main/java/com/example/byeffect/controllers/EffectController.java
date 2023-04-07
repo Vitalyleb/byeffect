@@ -1,13 +1,18 @@
 package com.example.byeffect.controllers;
 
 import com.example.byeffect.DTO.EffectDto;
-import com.example.byeffect.Mappers.EffectMapper;
+import com.example.byeffect.DTO.MedicationDto;
+//import com.example.byeffect.Mappers.EffectMapper;
 import com.example.byeffect.models.Effect;
+import com.example.byeffect.models.Medication;
 import com.example.byeffect.services.EffectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -37,6 +42,28 @@ public class EffectController {
     @GetMapping("/a/{id}")
     public EffectDto sayHello(@PathVariable Long id){
         Effect effect = effectService.getEffect(id);
-        return EffectMapper.INSTANCE.toDTO(effect);
+        return  toDTO(effect);
+    }
+
+    private EffectDto toDTO(Effect effect){
+        Set<MedicationDto> medicationDtos = toDTOs(effect.getPreparations());
+        return EffectDto.builder()
+                .id(effect.getId())
+                .effect_of_antidepresant(effect.getEffectOfAntidepresant())
+                .preparation(medicationDtos)
+                .build();
+    }
+
+    private Set<MedicationDto> toDTOs(Set<Medication> medication){
+        return  medication.stream().map(medication1 -> toDTO(medication1)).collect(Collectors.toSet());
+
+    }
+
+    private MedicationDto toDTO(Medication medication){
+        return MedicationDto.builder()
+                .id(medication.getId())
+                .pre_name(medication.getPre_name()).
+                build();
+
     }
 }
