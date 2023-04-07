@@ -2,14 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <meta name="keywords" content="​Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической болезнью сердца​">
-    <meta name="description" content="">
-<#--    <link href="//cdn.boot-css.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">-->
     <title>Главная</title>
-    <title>Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической болезнью сердца</title>
-    <link rel="stylesheet" href="../static/my_file.css">
     <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
 
@@ -43,7 +36,7 @@
 <body>
 
 
-<h1><p align="center" style="font:italic 50px bold "Times New Roman> Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической болезнью сердца </p></h1>
+<h1><p align="center" style="font:italic 50px bold "Times New Roman>Веб-приложение для выбора антидепрессантов при терапии депрессивного эпизода у больных ишемической болезнью сердца</p></h1>
 <ol class="u-align-justify u-text u-text-2">
     <li><p align="justify" style="font:italic 20px bold "Times New Roman>В первой
             графе («шаги алгоритма») поставьте «да» напротив выбранной Вами группы
@@ -90,23 +83,17 @@
     </div>
 </#list>
 <br>
+<br>
 <div align="center">
     <button class="btn" id="btn">Рассчитать</button>
 </div>
-
-<h2>Список наиболее повторяющихся слов:</h2>
+<br>
+<hr>
+<h2 align="center">Список наиболее подходящих препаратов</h2>
 <ul id="wordList"></ul>
-<#--<form name="search">-->
-<#--    <input type="submit" name="qqq" value="Send"/>-->
-<#--</form>-->
-<#--    <button onclick = "button_click()" name="qqq">Показать препараты</button>-->
-<#--<script src="../static/script.js"></script>-->
 <script>
     const button = document.getElementById('btn')
     button.addEventListener('click', filterTable)
-    // let enter = button => button.classList.toggle("bg-rose");
-    // let leave = button => button.classList.toggle("bg-rose");
-
 
     function filterTable() {
 
@@ -191,11 +178,6 @@
 
         var str = "Hello, world!";
         var substr = "l";
-        // var count = countSubstring(str, substr);
-
-        // console.log(count); // 3
-
-        // console.log('rows', checkedRows)
 
         // Проходимся по всем строкам таблицы
         var rows = document.getElementsByTagName("tr");
