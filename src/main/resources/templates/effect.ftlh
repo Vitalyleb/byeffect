@@ -4,11 +4,13 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="​Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической болезнью сердца​">
+    <meta name="keywords"
+          content="​Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической болезнью сердца​">
     <meta name="description" content="">
     <#--    <link href="//cdn.boot-css.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">-->
     <title>Главная</title>
-    <title>Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической болезнью сердца</title>
+    <title>Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической
+        болезнью сердца</title>
     <link rel="stylesheet" href="../static/my_file.css">
     <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
@@ -21,20 +23,21 @@
 
         .table-fill {
             background: white;
-            padding:5px;
+            padding: 5px;
             width: 80%;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
             animation: float 5s infinite;
         }
+
         tr {
             border-top: 1px solid #C1C3D1;
-            color:#666B85;
+            color: #666B85;
         }
 
         td {
-            background:#FFFFFF;
-            padding:10px;
-            text-align:left;
+            background: #FFFFFF;
+            padding: 10px;
+            text-align: left;
 
         }
 
@@ -43,24 +46,25 @@
 <body>
 
 
-<h1><p align="center" style="font:italic 50px bold "Times New Roman> Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической болезнью сердца </p></h1>
+<h1><p align="center" style="font:italic 50px bold " Times New Roman> Автоматизированный алгоритм выбора антидепрессанта
+        для терапии депрессивного эпизода у больных ишемической болезнью сердца </p></h1>
 <ol class="u-align-justify u-text u-text-2">
-    <li><p align="justify" style="font:italic 20px bold "Times New Roman>В первой
+    <li><p align="justify" style="font:italic 20px bold " Times New Roman>В первой
             графе («шаги алгоритма») поставьте «да» напротив выбранной Вами группы
             антидепрессантов, а затем и антидепрессанта, с Вашей точки зрения наиболее
             подходящих для конкретного пациента с ишемической болезнью сердца и
             диагностированным депрессивным расстройством.<br>
         </p></li>
-    <li><p align="justify" style="font:italic 20px bold "Times New Roman>Далее
+    <li><p align="justify" style="font:italic 20px bold " Times New Roman>Далее
             последовательно анализируйте каждый из ниже представленных «шагов алгоритма»,
             отмечая каким-либо образом (например, «V»)
             желаемый эффект для конкретного пациента, а затем – и один, выбранный Вами из
             предложенной группы, антидепрессант.</p></li>
-    <li><p align="justify" style="font:italic 20px bold "Times New Roman> Подсчитайте
+    <li><p align="justify" style="font:italic 20px bold " Times New Roman> Подсчитайте
             количество вариантов «да» для каждого из антидепрессантов. 3 препарата,
             набравших максимальное количество выборов, являются оптимальными для данного
             пациента с ИБС и выявленным депрессивным расстройством.</p></li>
-    <li><p align="justify" style="font:italic 20px bold "Times New Roman>Уточните
+    <li><p align="justify" style="font:italic 20px bold " Times New Roman>Уточните
             для выбранного антидепрессанта относительные противопоказания и взаимодействия
             с другими препаратами, принимаемыми пациентом в соответствии с инструкцией к
             применению.<br></p>
@@ -69,26 +73,31 @@
 <br>
 
 
-<#list effects as effect>
-    <div>
-        <table class="table-fill" border="1" cellspacing="1" cellpadding="5" width="80%" align="center">
-            <thead>
-            <tr>
-                <th></th>
-                <th>Эффекты</th>
-                <th>Препараты</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="tableBody" align="center" valign="middle">
-                <td><input type="checkbox" name="item1"></td>
-                <td width="50%" align="center">${effect.eff} </td>
-                <td width="50%" align="center">${effect.pre}</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</#list>
+<table class="table-fill" border="1" cellspacing="1" cellpadding="5" width="80%" align="center">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Эффекты</th>
+        <th>Препараты</th>
+    </tr>
+    </thead>
+    <tbody>
+    <#list effects as effect>
+
+        <tr class="tableBody" align="center" valign="middle">
+            <td><input type="checkbox" name="item1"></td>
+            <td width="50%" align="center">${effect.effectOfAntidepresant} </td>
+            <td width="50%" align="center">
+                <#list effect.preparations as preparations>
+                    <span>${preparations.pre_name}</span>
+                </#list>
+            </td>
+        </tr>
+    </#list>
+    </tbody>
+</table>
+
+
 <br>
 <div align="center">
     <button class="btn" id="btn">Рассчитать</button>
@@ -144,7 +153,7 @@
         let medicineArray = []
         let medicineString = ''
 
-        for (let i = 0; i < checkedRows.length; i++){
+        for (let i = 0; i < checkedRows.length; i++) {
             checkedRows[i] = checkedRows[i].slice(checkedRows[i].lastIndexOf('\t')).replace('\t', '')
             medicineString += checkedRows[i]
             medicineArray.push(...checkedRows[i].replaceAll(' ', '').split(','))
@@ -166,18 +175,18 @@
             count: 0
         }
 
-        for (let i = 0; i < medicineArray.length; i++){
+        for (let i = 0; i < medicineArray.length; i++) {
             const result = countSubstring(medicineString, medicineArray[i])
-            if (result > biggest.count){
+            if (result > biggest.count) {
                 biggest.name = medicineArray[i]
                 biggest.count = result
-            } else if (result > middle.count){
-                if (biggest.name !== medicineArray[i]){
+            } else if (result > middle.count) {
+                if (biggest.name !== medicineArray[i]) {
                     middle.name = medicineArray[i]
                     middle.count = result
                 }
-            } else if (result > smallest.count){
-                if (biggest.name !== medicineArray[i] && middle.name !== medicineArray[i]){
+            } else if (result > smallest.count) {
+                if (biggest.name !== medicineArray[i] && middle.name !== medicineArray[i]) {
                     smallest.name = medicineArray[i]
                     smallest.count = result
                 }
@@ -230,7 +239,7 @@
 
 
         // Сортируем слова по количеству повторений
-        var sortedWords = Object.keys(words).sort(function(a, b) {
+        var sortedWords = Object.keys(words).sort(function (a, b) {
             return words[b] - words[a];
         });
 

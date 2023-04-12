@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class EffectServiceImpl implements EffectService{
@@ -17,6 +19,12 @@ public class EffectServiceImpl implements EffectService{
         return effectRepository.getById(id);
 //        return effectRepository.getById(id).orElseThrow(()->new NullPointerException());
     }
+
+    @Override
+    public List<Effect> getAllEffects() {
+        return effectRepository.findAll();
+    }
+
 
     public EffectRepository getEffectRepository() {
         return effectRepository;

@@ -3,19 +3,24 @@ package com.example.byeffect.controllers;
 import com.example.byeffect.DTO.EffectDto;
 import com.example.byeffect.DTO.MedicationDto;
 //import com.example.byeffect.Mappers.EffectMapper;
+import com.example.byeffect.Mappers.EffectMapper;
 import com.example.byeffect.models.Effect;
 import com.example.byeffect.models.Medication;
 import com.example.byeffect.services.EffectService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 public class EffectController {
 
@@ -39,28 +44,37 @@ public class EffectController {
 //    }
 
 
-    @GetMapping("/a/{id}")
-    public EffectDto sayHello(@PathVariable Long id){
-        Effect effect = effectService.getEffect(id);
-        return  toDTO(effect);
+//    @GetMapping("/a/{id}")
+//    public EffectDto sayHello(@PathVariable Long id){
+//        Effect effect = effectService.getEffect(id);
+//        return  toDTO(effect);
+//    }
+
+    @GetMapping("/get_all")
+    public String showAll(Model model) {
+        List<EffectDto> effectDtos = effectService.getAllEffects().stream().
+                map(EffectMapper.INSTANCE::toDTO).
+                toList();
+        model.addAttribute("effects",effectDtos);
+        return "effect";
     }
 
+//
+//    private EffectDto toDTO(Effect effect){
+//        Set<MedicationDto> medicationDtos = toDTOs(effect.getPreparations());
+//        return EffectDto.builder()
+//                .id(effect.getId())
+//                .effectOfAntidepresant(effect.getEffectOfAntidepresant())
+//                .preparations(medicationDtos)
+//                .build();
+//    }
 
-    private EffectDto toDTO(Effect effect){
-        Set<MedicationDto> medicationDtos = toDTOs(effect.getPreparations());
-        return EffectDto.builder()
-                .id(effect.getId())
-                .effect_of_antidepresant(effect.getEffectOfAntidepresant())
-                .preparation(medicationDtos)
-                .build();
+    private Set<MedicationDto> toDTOs(Set<Medication> medication) {
+        return medication.stream().map(this::toDTO).collect(Collectors.toSet());
+
     }
 
-    private Set<MedicationDto> toDTOs(Set<Medication> medication){
-        return  medication.stream().map(this::toDTO).collect(Collectors.toSet());
-
-    }
-
-    private MedicationDto toDTO(Medication medication){
+    private MedicationDto toDTO(Medication medication) {
         return MedicationDto.builder()
                 .id(medication.getId())
                 .pre_name(medication.getPre_name()).

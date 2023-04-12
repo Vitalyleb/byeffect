@@ -21,7 +21,7 @@ public class Medication {
     @Column(name = "id")
     private Long id;
     private String pre_name;
-    @ManyToMany(mappedBy = "preparations")
+    @ManyToMany(mappedBy = "preparations",fetch = FetchType.LAZY)
     private Set<Effect> effects;
 
     public Long getId() {

@@ -15,12 +15,12 @@ import java.util.Set;
 @NoArgsConstructor
 public class Effect {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "effect_of_antidepresant", columnDefinition = "text")
     private String effectOfAntidepresant;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinTable(
             name = "effect_preparation",
             joinColumns = @JoinColumn(name = "eff_id"),
