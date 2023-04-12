@@ -149,6 +149,7 @@
                 data.push(checkboxes[i].parentNode.previousSibling.textContent);
             }
         }
+        console.log(data)
 
         let medicineArray = []
         let medicineString = ''
