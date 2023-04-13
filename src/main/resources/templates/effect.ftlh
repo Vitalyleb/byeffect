@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <meta name="keywords"
-          content="​Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической болезнью сердца​">
-    <meta name="description" content="">
+          content="​Веб-приложение для выбора антидепрессантов при терапии депрессивного эпизода у больных ишемической болезнью сердца​">
+<#--    <meta name="description" content="">-->
     <#--    <link href="//cdn.boot-css.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">-->
     <title>Главная</title>
-    <title>Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической
-        болезнью сердца</title>
+<#--    <title>Автоматизированный алгоритм выбора антидепрессанта для терапии депрессивного эпизода у больных ишемической-->
+<#--        болезнью сердца</title>-->
     <link rel="stylesheet" href="../static/my_file.css">
+    <link rel="icon" type="image/x-icon" href="../../../images/favicon.png">
     <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
 
@@ -41,13 +42,32 @@
 
         }
 
+        .btn{
+            padding: 10px 15px;
+            border-radius: 15px;
+            background-color: yellow;
+            color: black;
+            border: yellow;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        input[type=checkbox]
+        {
+            -ms-transform: scale(2); /* IE */
+            -moz-transform: scale(2); /* FF */
+            -webkit-transform: scale(2); /* Safari and Chrome */
+            -o-transform: scale(2); /* Opera */
+            transform: scale(2);
+            padding: 10px;
+        }
+
     </style>
 </head>
 <body>
 
 
-<h1><p align="center" style="font:italic 50px bold " Times New Roman> Автоматизированный алгоритм выбора антидепрессанта
-        для терапии депрессивного эпизода у больных ишемической болезнью сердца </p></h1>
+<h1><p align="center" style="font:italic 50px bold " Times New Roman> Веб-приложение для выбора антидепрессантов при терапии депрессивного эпизода у больных ишемической болезнью сердца</p></h1>
 <ol class="u-align-justify u-text u-text-2">
     <li><p align="justify" style="font:italic 20px bold " Times New Roman>В первой
             графе («шаги алгоритма») поставьте «да» напротив выбранной Вами группы
@@ -101,9 +121,12 @@
 <br>
 <div align="center">
     <button class="btn" id="btn">Рассчитать</button>
+    <button class="btn" onclick="location.reload(); return false;">
+        Обновить страницу
+    </button>
 </div>
 
-<h2>Список наиболее повторяющихся слов:</h2>
+<h2>Список наиболее оптимальных антидепрессантов для данного пациента: </h2>
 <ul id="wordList"></ul>
 <#--<form name="search">-->
 <#--    <input type="submit" name="qqq" value="Send"/>-->
@@ -113,9 +136,6 @@
 <script>
     const button = document.getElementById('btn')
     button.addEventListener('click', filterTable)
-    // let enter = button => button.classList.toggle("bg-rose");
-    // let leave = button => button.classList.toggle("bg-rose");
-
 
     function filterTable() {
 
@@ -131,25 +151,21 @@
             return count;
         }
 
-        var table = document.getElementsByTagName('table')[0];
-        const allRows = document.getElementsByTagName('table')
+
+        const allRows = document.getElementsByTagName('table')[0].children[1].children
         // Получаем все checkbox в таблице
         var checkboxes = document.querySelectorAll('input[type=checkbox]');
 
         // Создаем массив для хранения помеченных checkbox и данных из второго столбца
         var checked = [];
-        var data = [];
         const checkedRows = []
-
         // Проходимся по всем checkbox и добавляем помеченные в массив
-        for (var i = 0; i < checkboxes.length; i++) {
+        for (let i = 0; i < checkboxes.length; i++) {
             if (checkboxes[i].checked) {
                 checkedRows.push(allRows[i].innerText)
                 checked.push(checkboxes[i]);
-                data.push(checkboxes[i].parentNode.previousSibling.textContent);
             }
         }
-        console.log(data)
 
         let medicineArray = []
         let medicineString = ''
@@ -157,11 +173,8 @@
         for (let i = 0; i < checkedRows.length; i++) {
             checkedRows[i] = checkedRows[i].slice(checkedRows[i].lastIndexOf('\t')).replace('\t', '')
             medicineString += checkedRows[i]
-            medicineArray.push(...checkedRows[i].replaceAll(' ', '').split(','))
+            medicineArray.push(...checkedRows[i].split(' '))
         }
-
-        console.log('String', medicineString)
-        console.log('Array', medicineArray)
 
         let biggest = {
             name: '',
@@ -176,21 +189,20 @@
             count: 0
         }
 
-        for (let i = 0; i < medicineArray.length; i++) {
+
+
+
+        for (var i = 0; i < medicineArray.length; i++) {
             const result = countSubstring(medicineString, medicineArray[i])
             if (result > biggest.count) {
                 biggest.name = medicineArray[i]
                 biggest.count = result
-            } else if (result > middle.count) {
-                if (biggest.name !== medicineArray[i]) {
+            } else if (result > middle.count && biggest.name !== medicineArray[i]) {
                     middle.name = medicineArray[i]
                     middle.count = result
-                }
-            } else if (result > smallest.count) {
-                if (biggest.name !== medicineArray[i] && middle.name !== medicineArray[i]) {
+            } else if (result > smallest.count && biggest.name !== medicineArray[i] && middle.name !== medicineArray[i]) {
                     smallest.name = medicineArray[i]
                     smallest.count = result
-                }
             }
         }
 
@@ -198,17 +210,8 @@
         console.log(middle)
         console.log(smallest)
 
-
-        var str = "Hello, world!";
-        var substr = "l";
-        // var count = countSubstring(str, substr);
-
-        // console.log(count); // 3
-
-        // console.log('rows', checkedRows)
-
         // Проходимся по всем строкам таблицы
-        var rows = document.getElementsByTagName("tr");
+        const rows = document.getElementsByTagName('table')[0].getElementsByTagName('tr');
         for (var i = 0; i < rows.length; i++) {
             // Если строка содержит checkbox, проверяем, был ли он помечен
             var rowCheckbox = rows[i].getElementsByTagName("input")[0];
@@ -223,39 +226,12 @@
             }
         }
 
-        // Считаем повторяющиеся слова
-        var words = [];
         var wordList = document.getElementById('wordList');
-        var rows = table.getElementsByTagName('tr');
 
-        for (var i = 1; i < rows.length; i++) {
-            var word = rows[i].getElementsByTagName('td')[1].textContent;
-            if (words[word]) {
-                words[word]++;
-            } else {
-                words[word] = 1;
-            }
-            console.log(words)
-        }
+        const li = document.createElement('li');
+        li.textContent = biggest.name + ', ' + middle.name + ', ' + smallest.name + '.';
+        wordList.appendChild(li);
 
-
-        // Сортируем слова по количеству повторений
-        var sortedWords = Object.keys(words).sort(function (a, b) {
-            return words[b] - words[a];
-        });
-
-        // Выводим три наиболее повторяющихся слова
-        for (var i = 0; i < 3; i++) {
-            for (var i = 0; i < 3; i++) {
-                if (sortedWords[i]) {
-                    var li = document.createElement('li');
-                    li.textContent = biggest.name + ', ' + middle.name + ', ' + smallest.name + '.';
-
-                    // li.textContent = sortedWords[i] + ' (' + words[sortedWords[i]] + ')';
-                    wordList.appendChild(li);
-                }
-            }
-        }
     }
 </script>
 </body>
