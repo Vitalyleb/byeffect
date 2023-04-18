@@ -1,0 +1,22 @@
+version: '2'
+services:
+  web:
+    container_name: byef
+    image: lebvit/byeffect:app
+    ports:
+      - "8080:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/byef
+      SPRING_DATASOURCE_USERNAME: vitally
+      SPRING_DATASOURCE_PASSWORD: 09opt67
+    depends_on:
+      - db
+  db:
+    container_name: byef-db
+    image: postgres
+    environment:
+      - POSTGRES_DB=byef
+      - POSTGRES_PASSWORD=09opt67
+      - POSTGRES_USER=vitally
+    ports:
+      - "5432:5432"
